@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>teste</title>
+    <link rel="stylesheet" href="{% static 'GymControl/css/teste.css' %}">
+</head>
+<body>
+    <h1>Alunos</h1>
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Peso</th>
+            <th>Altura</th>
+        </tr>
+        {% for aluno in alunos %}
+            <tr>
+                <td>{{ aluno.user.first_name }}</td>
+                <td>{{ aluno.peso }} Kg</td>
+                <td>{{ aluno.altura }} Cm</td>
+            </tr>
+        {% empty %}
+            <tr><th colspan="5">Ainda não tem alunos cadastrados</th></tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
