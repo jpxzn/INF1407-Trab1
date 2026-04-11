@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>treino</title>
+    <link rel="stylesheet" href="{% static 'GymControl/css/treinos.css' %}">
+    <link rel="stylesheet" href="{% static 'GymControl/css/links.css' %}">
+</head>
+<body>
+    {% include 'GymControl/links.html' %}
+    {% for treino in treinos %}
+        <div>
+            <h2>{{ treino.nome }}</h2>
+        </div>
+    {% empty %}
+        <p>Nenhum treino encontrado.</p>
+    {% endfor %}
+</body>
+</html>
