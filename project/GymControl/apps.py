@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class GymcontrolConfig(AppConfig):
+class GymControlConfig(AppConfig):
     name = 'GymControl'
