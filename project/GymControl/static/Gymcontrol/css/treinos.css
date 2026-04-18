@@ -1,0 +1,178 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    color: #2c3e50;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+hr {
+    width: 90%;
+    margin: 25px auto;
+    border: none;
+    border-top: 1px solid #dcdfe3;
+}
+
+.page-container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto 40px auto;
+}
+
+.form-page-container {
+    width: 90%;
+    max-width: 700px;
+    margin: 40px auto;
+}
+
+.form-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.form-card p {
+    margin-bottom: 18px;
+}
+
+.form-card input[type="text"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccd1d9;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-button-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.main-link-button {
+    background-color: #1abc9c;
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    font-size: 15px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.main-link-button:hover {
+    background-color: #16a085;
+}
+
+.treinos-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.treino-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    transition: 0.3s;
+}
+
+.treino-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.12);
+}
+
+.treino-card a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.treino-card h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.treino-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.edit-link {
+    background-color: #3498db;
+    color: white !important;
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.edit-link:hover {
+    background-color: #2980b9;
+}
+
+.delete-button,
+.save-button {
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.delete-button {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #c0392b;
+}
+
+.save-button {
+    background-color: #1abc9c;
+    color: white;
+}
+
+.save-button:hover {
+    background-color: #16a085;
+}
+
+.cancel-link {
+    background-color: #bdc3c7;
+    color: #2c3e50;
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.cancel-link:hover {
+    background-color: #95a5a6;
+}
+
+.empty-message {
+    text-align: center;
+    font-size: 16px;
+    color: #7f8c8d;
+    margin-top: 30px;
+}

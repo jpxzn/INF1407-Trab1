@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Treinos - Admin</title>
+    <link rel="stylesheet" href="{% static 'Gymcontrol/css/treinos.css' %}">
+    <link rel="stylesheet" href="{% static 'GymControl/css/links.css' %}">
+</head>
+<body>
+    {% include 'GymControl/links.html' %}
+
+    <div class="page-container">
+        <h1>Todos os Alunos</h1>
+
+        <div class="treinos-list">
+            {% for aluno in alunos %}
+                <div class="treino-card">
+                    <a href="{% url 'GymControl:treinosAluno' aluno.id %}">
+                        <h2>{{ aluno.user.username }}</h2>
+                    </a>
+                </div>
+            {% empty %}
+                <p class="empty-message">Nenhum aluno encontrado.</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

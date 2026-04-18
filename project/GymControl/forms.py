@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from .models import Treino
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -17,3 +18,8 @@ class CustomUserCreationForm(UserCreationForm):
             user.save()
 
         return user
+
+class TreinoForm(forms.ModelForm):
+    class Meta:
+        model = Treino
+        fields = ['nome']
