@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Treino
+from .models import Treino, TreinoExercicio
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -23,3 +23,7 @@ class TreinoForm(forms.ModelForm):
     class Meta:
         model = Treino
         fields = ['nome']
+class TreinoExercicioForm(forms.ModelForm):
+    class Meta:
+        model = TreinoExercicio
+        fields = ['exercicio', 'qtd_series', 'qtd_repeticoes']

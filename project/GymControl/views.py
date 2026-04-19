@@ -3,7 +3,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.base import View
 from .models import Treino, Aluno, TreinoExercicio
-from .forms import CustomUserCreationForm, TreinoForm
+from .forms import CustomUserCreationForm, TreinoForm, TreinoExercicioForm
 
 class HomeView(View):
     def get(self, request, *args, **kwargs):
@@ -143,7 +143,92 @@ class DeletarTreinoView(LoginRequiredMixin, View):
         treino.delete()
 
         return redirect('GymControl:treinosAluno', id=aluno_id)
+    
+class ExerciciosTreinoAdminView(LoginRequiredMixin, View):
+    def get(self, request, treino_id, *args, **kwargs):
+        if not (request.user.is_superuser or request.user.is_staff):
+            return redirect('GymControl:home')
 
+        treino = get_object_or_404(Treino, id=treino_id)
+        exercicios = TreinoExercicio.objects.filter(treino=treino)
+
+        return render(request, 'GymControl/exerciciosTreinoAdmin.html', {
+            'treino': treino,
+            'exercicios': exercicios
+        })
+
+class CriarExercicioTreinoView(LoginRequiredMixin, View):
+    def get(self, request, treino_id, *args, **kwargs):
+        if not (request.user.is_superuser or request.user.is_staff):
+            return redirect('GymControl:home')
+
+        treino = get_object_or_404(Treino, id=treino_id)
+        form = TreinoExercicioForm()
+
+        return render(request, 'GymControl/criarExercicioTreino.html', {
+            'treino': treino,
+            'form': form
+        })
+
+    def post(self, request, treino_id, *args, **kwargs):
+        if not (request.user.is_superuser or request.user.is_staff):
+            return redirect('GymControl:home')
+
+        treino = get_object_or_404(Treino, id=treino_id)
+        form = TreinoExercicioForm(request.POST)
+
+        if form.is_valid():
+            treino_exercicio = form.save(commit=False)
+            treino_exercicio.treino = treino
+            treino_exercicio.save()
+            return redirect('GymControl:exerciciosTreinoAdmin', treino_id=treino.id)
+
+        return render(request, 'GymControl/criarExercicioTreino.html', {
+            'treino': treino,
+            'form': form
+        })
+    
+class EditarExercicioTreinoView(LoginRequiredMixin, View):
+    def get(self, request, treino_exercicio_id, *args, **kwargs):
+        if not (request.user.is_superuser or request.user.is_staff):
+            return redirect('GymControl:home')
+
+        treino_exercicio = get_object_or_404(TreinoExercicio, id=treino_exercicio_id)
+        form = TreinoExercicioForm(instance=treino_exercicio)
+
+        return render(request, 'GymControl/editarExercicioTreino.html', {
+            'treino_exercicio': treino_exercicio,
+            'treino': treino_exercicio.treino,
+            'form': form
+        })
+
+    def post(self, request, treino_exercicio_id, *args, **kwargs):
+        if not (request.user.is_superuser or request.user.is_staff):
+            return redirect('GymControl:home')
+
+        treino_exercicio = get_object_or_404(TreinoExercicio, id=treino_exercicio_id)
+        form = TreinoExercicioForm(request.POST, instance=treino_exercicio)
+
+        if form.is_valid():
+            form.save()
+            return redirect('GymControl:exerciciosTreinoAdmin', treino_id=treino_exercicio.treino.id)
+
+        return render(request, 'GymControl/editarExercicioTreino.html', {
+            'treino_exercicio': treino_exercicio,
+            'treino': treino_exercicio.treino,
+            'form': form
+        })
+    
+class DeletarExercicioTreinoView(LoginRequiredMixin, View):
+    def post(self, request, treino_exercicio_id, *args, **kwargs):
+        if not (request.user.is_superuser or request.user.is_staff):
+            return redirect('GymControl:home')
+
+        treino_exercicio = get_object_or_404(TreinoExercicio, id=treino_exercicio_id)
+        treino_id = treino_exercicio.treino.id
+        treino_exercicio.delete()
+
+        return redirect('GymControl:exerciciosTreinoAdmin', treino_id=treino_id)
 class AvaliacaoView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         return render(request, 'GymControl/avaliacao.html')

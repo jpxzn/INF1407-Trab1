@@ -13,18 +13,10 @@
     <div class="page-container">
         <h1>Treinos de {{ aluno.user.username }}</h1>
 
-        <div class="create-button-container">
-            <a href="{% url 'GymControl:criarTreino' aluno.id %}" class="main-link-button">
-                + Criar treino
-            </a>
-        </div>
-
-        <hr>
-
         <div class="treinos-list">
             {% for treino in treinos %}
                 <div class="treino-card">
-                    <a href="{% url 'GymControl:exerciciosTreino' treino.id %}">
+                    <a href="{% url 'GymControl:exerciciosTreinoAdmin' treino.id %}">
                         <h2>{{ treino.nome }}</h2>
                     </a>
 
@@ -42,6 +34,12 @@
             {% empty %}
                 <p class="empty-message">Nenhum treino encontrado para este aluno.</p>
             {% endfor %}
+        </div>
+
+        <div class="create-button-container">
+            <a href="{% url 'GymControl:criarTreino' aluno.id %}" class="main-link-button">
+                + Criar treino
+            </a>
         </div>
     </div>
 </body>
