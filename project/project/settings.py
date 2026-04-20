@@ -12,7 +12,12 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
+from dotenv import load_dotenv
 
+load_dotenv()
+
+url_bd = os.getenv("DATABASE_URL")
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,9 +32,9 @@ LOGOUT_REDIRECT_URL = 'GymControl:home'
 SECRET_KEY = 'django-insecure-$hryb$7o=@p5gol62m*#w1)bx13s53gh-^+31)q)m45c_hn))w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1']
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -87,10 +92,12 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.parse(
+        url_bd,
+        conn_max_age = 600,
+        ssl_require= True,
+
+    )
 }
 
 
