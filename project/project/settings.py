@@ -27,11 +27,19 @@ LOGOUT_REDIRECT_URL = 'GymControl:home'
 SECRET_KEY = 'django-insecure-$hryb$7o=@p5gol62m*#w1)bx13s53gh-^+31)q)m45c_hn))w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['.vercel.app']
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'GymControl/static')
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Application definition
 
