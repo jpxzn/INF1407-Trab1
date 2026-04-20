@@ -12,9 +12,9 @@
     {% include 'GymControl/links.html' %}
     <div class="page-container">
         <h1>{{ treino.nome }}</h1>
-
-        <div class="treino-card">
+  
             {% for te in exercicios %}
+                <div class="treino-card"></div>
                     <h2>
                         {% if te.exercicio.link_video %}
                             <a href="{{ te.exercicio.link_video }}" target="_blank">
@@ -28,10 +28,10 @@
                     <p><strong>Músculo:</strong> {{ te.exercicio.get_musculo_trabalhado_display }}</p>
                     <p>Séries: {{ te.qtd_series }}</p>
                     <p>Repetições: {{ te.qtd_repeticoes }}</p>
+                </div>
             {% empty %}
                 <p>Nenhum exercício cadastrado.</p>
             {% endfor %}
-        </div>
     </div>
 
 </body>
