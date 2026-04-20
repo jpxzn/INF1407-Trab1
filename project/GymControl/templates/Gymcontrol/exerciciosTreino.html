@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ treino.nome }}</title>
+    <link rel="stylesheet" href="{% static 'GymControl/css/treinos.css' %}">
+    <link rel="stylesheet" href="{% static 'GymControl/css/links.css' %}">
+</head>
+<body>
+
+    {% include 'GymControl/links.html' %}
+    <div class="page-container">
+        <h1>{{ treino.nome }}</h1>
+
+        <div class="treino-card">
+            {% for te in exercicios %}
+                    <h2>
+                        {% if te.exercicio.link_video %}
+                            <a href="{{ te.exercicio.link_video }}" target="_blank">
+                                {{ te.exercicio.nome }}
+                            </a>
+                        {% else %}
+                            {{ te.exercicio.nome }}
+                        {% endif %}
+                    </h2>
+
+                    <p><strong>Músculo:</strong> {{ te.exercicio.get_musculo_trabalhado_display }}</p>
+                    <p>Séries: {{ te.qtd_series }}</p>
+                    <p>Repetições: {{ te.qtd_repeticoes }}</p>
+            {% empty %}
+                <p>Nenhum exercício cadastrado.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>

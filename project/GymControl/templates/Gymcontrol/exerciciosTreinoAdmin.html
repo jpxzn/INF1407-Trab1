@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ treino.nome }}</title>
+    <link rel="stylesheet" href="{% static 'GymControl/css/treinos.css' %}">
+    <link rel="stylesheet" href="{% static 'GymControl/css/links.css' %}">
+</head>
+<body>
+    {% include 'GymControl/links.html' %}
+
+    <div class="page-container">
+        <h1>{{ treino.nome }}</h1>
+
+        <div class="treinos-list">
+            {% for te in exercicios %}
+                <div class="treino-card">
+                    <h2>
+                        {% if te.exercicio.link_video %}
+                            <a href="{{ te.exercicio.link_video }}" target="_blank">
+                                {{ te.exercicio.nome }}
+                            </a>
+                        {% else %}
+                            {{ te.exercicio.nome }}
+                        {% endif %}
+                    </h2>
+
+                    <p><strong>Músculo:</strong> {{ te.exercicio.get_musculo_trabalhado_display }}</p>
+                    <p>Séries: {{ te.qtd_series }}</p>
+                    <p>Repetições: {{ te.qtd_repeticoes }}</p>
+
+                    <div class="treino-actions">
+                        <a href="{% url 'GymControl:editarExercicioTreino' te.id %}" class="edit-link">
+                            Editar
+                        </a>
+
+                        <form method="post" action="{% url 'GymControl:deletarExercicioTreino' te.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="delete-button">Deletar</button>
+                        </form>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="empty-message">Nenhum exercício cadastrado.</p>
+            {% endfor %}
+        </div>
+
+        <div class="create-button-container">
+            <a href="{% url 'GymControl:criarExercicioTreino' treino.id %}" class="main-link-button">
+                + Adicionar exercício
+            </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Treino</title>
+    <link rel="stylesheet" href="{% static 'GymControl/css/treinos.css' %}">
+    <link rel="stylesheet" href="{% static 'GymControl/css/links.css' %}">
+</head>
+<body>
+    {% include 'GymControl/links.html' %}
+
+    <div class="form-page-container">
+        <div class="form-card">
+            <h1>Editar treino</h1>
+
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <div class="form-actions">
+                    <button type="submit" class="save-button">Atualizar</button>
+                    <a href="{% url 'GymControl:treinosAluno' treino.aluno.id %}" class="cancel-link">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
