@@ -3,16 +3,24 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Criar Treino</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar treino</title>
     <link rel="stylesheet" href="{% static 'GymControl/css/treinos.css' %}">
     <link rel="stylesheet" href="{% static 'GymControl/css/links.css' %}">
 </head>
 <body>
-    {% include 'GymControl/links.html' %}
+    {% include 'GymControl/common/links.html' %}
 
     <div class="form-page-container">
+        <a href="{% url 'GymControl:treinosAluno' aluno.id %}" class="back-link">← Voltar para os treinos do aluno</a>
+
         <div class="form-card">
-            <h1>Criar treino para {{ aluno.user.username }}</h1>
+            <div class="page-header">
+                <h1 class="page-title">Criar treino</h1>
+                <p class="page-subtitle">
+                    Cadastre um novo treino para <strong>{{ aluno.user.username }}</strong>.
+                </p>
+            </div>
 
             <form method="post">
                 {% csrf_token %}

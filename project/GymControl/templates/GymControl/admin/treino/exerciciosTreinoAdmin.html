@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ treino.nome }}</title>
+    <link rel="stylesheet" href="{% static 'GymControl/css/treinos.css' %}">
+    <link rel="stylesheet" href="{% static 'GymControl/css/links.css' %}">
+</head>
+<body>
+    {% include 'GymControl/common/links.html' %}
+
+    <div class="page-container">
+        <a href="{% url 'GymControl:treinosAluno' treino.aluno.id %}" class="back-link">← Voltar para os treinos do aluno</a>
+
+        <div class="page-header">
+            <h1 class="page-title">{{ treino.nome }}</h1>
+            <p class="page-subtitle">
+                Gerencie os exercícios cadastrados neste treino.
+            </p>
+        </div>
+
+        <div class="treinos-list" style="margin-top: 20px;">
+            {% for te in exercicios %}
+                <div class="treino-card">
+                    <h2 class="card-title">
+                        {% if te.exercicio.link_video %}
+                            <a href="{{ te.exercicio.link_video }}" target="_blank" class="exercise-link">
+                                {{ te.exercicio.nome }}
+                            </a>
+                        {% else %}
+                            {{ te.exercicio.nome }}
+                        {% endif %}
+                    </h2>
+
+                    <div class="exercise-meta">
+                        <div class="meta-box">
+                            <span class="meta-label">Músculo</span>
+                            <span class="meta-value">{{ te.exercicio.get_musculo_trabalhado_display }}</span>
+                        </div>
+
+                        <div class="meta-box">
+                            <span class="meta-label">Séries</span>
+                            <span class="meta-value">{{ te.qtd_series }}</span>
+                        </div>
+
+                        <div class="meta-box">
+                            <span class="meta-label">Repetições</span>
+                            <span class="meta-value">{{ te.qtd_repeticoes }}</span>
+                        </div>
+                    </div>
+
+                    <div class="treino-actions">
+                        <a href="{% url 'GymControl:editarExercicioTreino' te.id %}" class="edit-link">Editar</a>
+
+                        <form method="post" action="{% url 'GymControl:deletarExercicioTreino' te.id %}" class="inline-form">
+                            {% csrf_token %}
+                            <button type="submit" class="delete-button">Deletar</button>
+                        </form>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="empty-message">Nenhum exercício cadastrado neste treino.</p>
+            {% endfor %}
+        </div>
+
+        <div class="top-actions">
+            <a href="{% url 'GymControl:criarExercicioTreino' treino.id %}" class="main-link-button">
+                + Adicionar exercício
+            </a>
+        </div>
+    </div>
+</body>
+</html>

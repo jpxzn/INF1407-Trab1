@@ -39,8 +39,8 @@ password_patterns = [
     path(
         "password-reset/",
         PasswordResetView.as_view(
-            template_name="GymControl/password_reset.html",
-            email_template_name="GymControl/password_reset_email.html",
+            template_name="GymControl/user/auth/password_reset.html",
+            email_template_name="GymControl/user/auth/password_reset_email.html",
             success_url=reverse_lazy("GymControl:password_reset_done"),
         ),
         name="password_reset",
@@ -48,14 +48,14 @@ password_patterns = [
     path(
         "password-reset/done/",
         PasswordResetDoneView.as_view(
-            template_name="GymControl/password_reset_done.html"
+            template_name="GymControl/user/auth/password_reset_done.html"
         ),
         name="password_reset_done",
     ),
     path(
         "reset/<uidb64>/<token>/",
         PasswordResetConfirmView.as_view(
-            template_name="GymControl/password_reset_confirm.html",
+            template_name="GymControl/user/auth/password_reset_confirm.html",
             success_url=reverse_lazy("GymControl:password_reset_complete"),
         ),
         name="password_reset_confirm",
@@ -63,7 +63,7 @@ password_patterns = [
     path(
         "reset/done/",
         PasswordResetCompleteView.as_view(
-            template_name="GymControl/password_reset_complete.html"
+            template_name="GymControl/user/auth/password_reset_complete.html"
         ),
         name="password_reset_complete",
     ),

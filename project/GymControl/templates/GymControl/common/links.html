@@ -1,0 +1,23 @@
+<nav class="navbar">
+    <div class="nav-left">
+        <span class="logo">GymControl</span>
+
+        <a href="{% url 'GymControl:home' %}">Home</a>
+        <a href="{% url 'GymControl:treinos' %}">Treinos</a>
+        <a href="{% url 'GymControl:avaliacao' %}">Perfil Físico</a>
+    </div>
+
+    <div class="nav-right">
+        {% if user.is_authenticated %}
+            <span class="user">Olá, {{ user.username }}</span>
+
+            <form method="post" action="{% url 'GymControl:logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="logout-btn">Sair</button>
+            </form>
+        {% else %}
+            <a href="{% url 'GymControl:login' %}" class="login-link">Login</a>
+            <a href="{% url 'GymControl:cadastro' %}" class="signup-btn">Criar conta</a>
+        {% endif %}
+    </div>
+</nav>

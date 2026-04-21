@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Treinos</title>
+    <link rel="stylesheet" href="{% static 'GymControl/css/treinos.css' %}">
+    <link rel="stylesheet" href="{% static 'GymControl/css/links.css' %}">
+</head>
+<body>
+    {% include 'GymControl/common/links.html' %}
+
+    <div class="page-container">
+        <div class="page-header">
+            <h1 class="page-title">Meus Treinos</h1>
+            <p class="page-subtitle">
+                Visualize seus treinos cadastrados e acesse os exercícios de cada um deles.
+            </p>
+        </div>
+
+        <div class="treinos-list">
+            {% for treino in treinos %}
+                <div class="treino-card">
+                    <a href="{% url 'GymControl:exerciciosTreino' treino.id %}" class="card-link">
+                        <h2 class="card-title">{{ treino.nome }}</h2>
+                        <p class="card-text">Clique para ver os exercícios deste treino.</p>
+                    </a>
+                </div>
+            {% empty %}
+                <p class="empty-message">Nenhum treino encontrado no momento.</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

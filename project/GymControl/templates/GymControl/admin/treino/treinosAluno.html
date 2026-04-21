@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treinos do aluno</title>
+    <link rel="stylesheet" href="{% static 'GymControl/css/treinos.css' %}">
+    <link rel="stylesheet" href="{% static 'GymControl/css/links.css' %}">
+</head>
+<body>
+    {% include 'GymControl/common/links.html' %}
+
+    <div class="page-container">
+        <a href="{% url 'GymControl:treinos' %}" class="back-link">← Voltar para a lista de alunos</a>
+
+        <div class="page-header">
+            <h1 class="page-title">Treinos de {{ aluno.user.username }}</h1>
+            <p class="page-subtitle">
+                Gerencie os treinos cadastrados para este aluno.
+            </p>
+        </div>
+
+        <div class="treinos-list" style="margin-top: 20px;">
+            {% for treino in treinos %}
+                <div class="treino-card">
+                    <a href="{% url 'GymControl:exerciciosTreinoAdmin' treino.id %}" class="card-link">
+                        <h2 class="card-title">{{ treino.nome }}</h2>
+                        <p class="card-text">Clique para visualizar e gerenciar os exercícios deste treino.</p>
+                    </a>
+
+                    <div class="treino-actions">
+                        <a href="{% url 'GymControl:editarTreino' treino.id %}" class="edit-link">Editar</a>
+
+                        <form method="post" action="{% url 'GymControl:deletarTreino' treino.id %}" class="inline-form">
+                            {% csrf_token %}
+                            <button type="submit" class="delete-button">Deletar</button>
+                        </form>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="empty-message">Nenhum treino encontrado para este aluno.</p>
+            {% endfor %}
+        </div>
+
+        <div class="top-actions">
+            <a href="{% url 'GymControl:criarTreino' aluno.id %}" class="main-link-button">
+                + Criar treino
+            </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ treino.nome }}</title>
+    <link rel="stylesheet" href="{% static 'GymControl/css/treinos.css' %}">
+    <link rel="stylesheet" href="{% static 'GymControl/css/links.css' %}">
+</head>
+<body>
+
+    {% include 'GymControl/common/links.html' %}
+
+    <div class="page-container">
+        <a href="{% url 'GymControl:treinos' %}" class="back-link">← Voltar para meus treinos</a>
+
+        <div class="page-header">
+            <h1 class="page-title">{{ treino.nome }}</h1>
+            <p class="page-subtitle">
+                Confira abaixo os exercícios cadastrados neste treino.
+            </p>
+        </div>
+
+        <div class="treinos-list">
+            {% for te in exercicios %}
+                <div class="treino-card">
+                    <h2 class="card-title">
+                        {% if te.exercicio.link_video %}
+                            <a href="{{ te.exercicio.link_video }}" target="_blank" class="exercise-link">
+                                {{ te.exercicio.nome }}
+                            </a>
+                        {% else %}
+                            {{ te.exercicio.nome }}
+                        {% endif %}
+                    </h2>
+
+                    <p class="card-text">
+                        Exercício incluído neste treino com informações de execução abaixo.
+                    </p>
+
+                    <div class="exercise-meta">
+                        <div class="meta-box">
+                            <span class="meta-label">Músculo</span>
+                            <span class="meta-value">{{ te.exercicio.get_musculo_trabalhado_display }}</span>
+                        </div>
+
+                        <div class="meta-box">
+                            <span class="meta-label">Séries</span>
+                            <span class="meta-value">{{ te.qtd_series }}</span>
+                        </div>
+
+                        <div class="meta-box">
+                            <span class="meta-label">Repetições</span>
+                            <span class="meta-value">{{ te.qtd_repeticoes }}</span>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="empty-message">Nenhum exercício cadastrado neste treino.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>
