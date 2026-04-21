@@ -82,12 +82,12 @@ body {
 
 /* BOTÃO LOGOUT */
 .logout-btn {
+    display: inline-block;
     background: rgba(255, 255, 255, 0.08);
-    border: none;
     color: #ffffff;
     padding: 7px 12px;
     border-radius: 8px;
-    cursor: pointer;
+    text-decoration: none;
     transition: 0.2s;
 }
 
