@@ -1,6 +1,5 @@
 from django.urls import path, reverse_lazy
 from django.contrib.auth.views import (
-    LogoutView,
     PasswordResetView,
     PasswordResetDoneView,
     PasswordResetConfirmView,
@@ -9,6 +8,7 @@ from django.contrib.auth.views import (
 
 from .views import (
     HomeView,
+    LogoutView,
     UserLoginView,
     CadastroView,
     TreinosView,
@@ -21,7 +21,6 @@ from .views import (
     EditarExercicioTreinoView,
     DeletarExercicioTreinoView,
     ExerciciosTreinoView,
-    AvaliacaoView,
 )
 
 app_name = "GymControl"
@@ -107,11 +106,6 @@ exercicios_patterns = [
     path("treinos/<int:id>/", ExerciciosTreinoView.as_view(), name="exerciciosTreino"),
 ]
 
-# ------------------ AVALIAÇÃO ------------------
-avaliacao_patterns = [
-    path("avaliacao/", AvaliacaoView.as_view(), name="avaliacao"),
-]
-
 # ------------------ URLS FINAIS ------------------
 urlpatterns = [
     *auth_patterns,
@@ -119,5 +113,4 @@ urlpatterns = [
     *treinos_patterns,
     *exercicios_admin_patterns,
     *exercicios_patterns,
-    *avaliacao_patterns,
 ]

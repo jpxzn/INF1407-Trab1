@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.views import LoginView
+from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.base import View
 from .models import Treino, Aluno, TreinoExercicio
@@ -8,6 +9,11 @@ from .forms import CustomUserCreationForm, TreinoForm, TreinoExercicioForm
 class HomeView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'GymControl/common/home.html')
+    
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        return redirect('GymControl:home')
     
 class UserLoginView(LoginView):
     template_name = 'GymControl/user/auth/login.html'
@@ -229,6 +235,4 @@ class DeletarExercicioTreinoView(LoginRequiredMixin, View):
         treino_exercicio.delete()
 
         return redirect('GymControl:exerciciosTreinoAdmin', treino_id=treino_id)
-class AvaliacaoView(LoginRequiredMixin, View):
-    def get(self, request, *args, **kwargs):
-        return render(request, 'GymControl/user/avaliacao.html')
+    
