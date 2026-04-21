@@ -16,6 +16,11 @@
 - Edição/deldeção dos treinos
 - Visualização personalizada por usuário
 
+## 📌 Descrição do Projeto
+
+O GymControl é um sistema web desenvolvido com Django que permite o gerenciamento de treinos de usuários.
+O sistema possui autenticação, controle de acesso por tipo de usuário (comum e administrador) e permite a criação, visualização e gerenciamento de treinos e exercícios.
+
 ## 🌐 Publicação
 
 👉 **Link do site:** [GymControl](https://inf-1407-trab1.vercel.app/)  
@@ -115,6 +120,15 @@ Na criação do exercício:
 
 ---
 
-### ✅ Testes:
-- Tudo proposto inicialmente foi implementado
-- Todas funcionalidades foram testadas e funcionaram como esperado
+### ✅ Testes Realizados
+
+- Cadastro de usuários funcionando corretamente
+- Login e logout funcionando
+- CRUD de treinos funcionando
+- Associação de exercícios aos treinos funcionando
+- Redirecionamento para vídeos funcionando
+
+### ❌ Limitações
+
+- Formularios padrão em ingles (não foram traduzidos) 
+- recuperação de senha em produção não envia email (apesar de não ser necessario)
